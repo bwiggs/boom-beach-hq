@@ -27,9 +27,13 @@
     "electron-app"
   ],
   "dependencies": {
-    "electron-debug": "^0.1.1"
+    "electron-debug": "^0.1.1",
+    "lodash": "^3.10.1",
+    "sqlite3": "^3.1.0"
   },
   "devDependencies": {
+    "csv-parse": "^1.0.0",
+    "db-migrate": "^0.9.22",
     "electron-packager": "^5.0.0",
     "electron-prebuilt": "^0.31.1",
     "xo": "^0.7.1"
