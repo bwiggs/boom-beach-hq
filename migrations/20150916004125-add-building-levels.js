@@ -29,51 +29,66 @@ exports.up = function(db, callback) {
     wood: { type: 'int'},
     stone: { type: 'int'},
     iron: { type: 'int'},
-    required_hq_level: { type: 'int'},
     experience: { type: 'int'},
   }, insertBuildingLevels);
 
   function insertBuildingLevels(err) {
-    var buildingLevels = [];
+    var buildingLevels = {};
+    var records = [];
     var parser = parse({delimiter: ',', columns: true});
 
     parser.on("readable", function(){
       var record;
       while (record = parser.read()) {
-        buildingLevels.push(record);
+        processRecord(record);
       }
     });
 
+    function processRecord(record) {
+      var name = record.name;
+      var type = record.type;
+
+      delete record.name;
+      delete record.type;
+
+      if(!_.has(buildingLevels, name)) {
+        buildingLevels[name] = [];
+      }
+
+      _.each(record, function (v, lvl) {
+
+        lvl = parseInt(lvl);
+
+        if(_.isUndefined(v) || _.isEmpty(v)) { return; }
+
+        // console.log(name, 'level['+lvl+']',type, v);
+        var level = _.find(buildingLevels[name], {level: lvl});
+        if(!level) {
+          level = { level: lvl };
+          buildingLevels[name].push(level);
+        }
+
+        level[type] = v;
+      });
+    }
+
     parser.on('finish', function () {
-
-      buildingLevels.forEach(function (bl) {
-        var building  = bl;
-        db.all('select * from buildings where name = ?', bl.name, function (err, results) {
+      _.each(buildingLevels, function (levels, name) {
+        db.all('select * from buildings where name = ?', name, function (err, results) {
+          if(_.isEmpty(results)) { return; }
           var b = results[0];
-          var levels = bl;
-          delete levels.name;
-          _.each(levels, function (time, level) {
-            if(level > 1 && time == 0) return;
-            time = parseInt(time)
-            level = parseInt(level)
-            console.log(b.name, "level", level, "time", time);
-            var insertion = {
-              building_id: b.id,
-              time: time,
-              level: level
-            };
-            console.log(insertion);
-            db.insert(BUILDING_LEVELS_TABLE, _.keys(insertion), _.values(insertion));
+          _.each(levels, function (level) {
+
+            level.building_id = b.id;
+            db.insert(BUILDING_LEVELS_TABLE, _.keys(level), _.values(level));
           });
-
-
         });
       });
 
       callback();
     });
 
-    fs.createReadStream(__dirname+'/../data/building-level-times.csv').pipe(parser);
+    fs.createReadStream(__dirname+'/../data/master.csv').pipe(parser);
   }
 };
 
