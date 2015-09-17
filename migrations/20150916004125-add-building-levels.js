@@ -30,6 +30,7 @@ exports.up = function(db, callback) {
     stone: { type: 'int'},
     iron: { type: 'int'},
     experience: { type: 'int'},
+    required_hq: { type: 'int'}
   }, insertBuildingLevels);
 
   function insertBuildingLevels(err) {
