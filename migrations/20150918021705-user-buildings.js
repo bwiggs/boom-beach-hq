@@ -26,7 +26,7 @@ exports.up = function(db, callback) {
       unsigned: true,
       foreignKey: {
         name: 'user_buildings_building_level_id_fk',
-        table: 'buildings',
+        table: 'building_levels',
         mapping: 'id',
       }
     },
