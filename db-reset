@@ -1,0 +1,1 @@
+rm -rf bbhq.db && db-migrate up
