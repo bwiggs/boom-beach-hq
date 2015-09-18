@@ -13,12 +13,11 @@ let mainWindow;
 
 function createMainWindow() {
 	const win = new BrowserWindow({
-		width: 600,
-		height: 400,
-		resizable: false
+		width: 1000,
+		height: 600,
 	});
 
-	win.loadUrl(`file://${__dirname}/index.html`);
+	win.loadUrl(`file://${__dirname}/app/index.html`);
 	win.on('closed', onClosed);
 
 	return win;

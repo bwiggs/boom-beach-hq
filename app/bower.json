@@ -1,0 +1,10 @@
+{
+  "name": "app",
+  "main": "index.js",
+  "version": "0.0.0",
+  "homepage": "https://github.com/bawigga/boom-beach-hq",
+  "authors": [
+    "Brian Wigginton <brianwigginton@gmail.com>"
+  ],
+  "license": "MIT"
+}
