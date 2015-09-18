@@ -6,5 +6,8 @@
   "authors": [
     "Brian Wigginton <brianwigginton@gmail.com>"
   ],
-  "license": "MIT"
+  "license": "MIT",
+  "dependencies": {
+    "react": "~0.13.3"
+  }
 }
