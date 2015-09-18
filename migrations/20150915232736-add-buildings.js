@@ -44,7 +44,9 @@ exports.up = function(db, callback) {
       { name: 'Armory'          , type: 'support', max_level: 20 },
       { name: 'Submarine'       , type: 'support', max_level: 10 },
       { name: 'Sculptor'        , type: 'support', max_level: 8 },
-      { name: 'Weapon Lab'      , type: 'support', max_level: 5 }
+      { name: 'Weapon Lab'      , type: 'support', max_level: 5 },
+      { name: 'Mine'      , type: 'support', max_level: 20 },
+      { name: 'Boom Mine'      , type: 'support', max_level: 16 }
     ].forEach(function (building) {
       var b = db.insert(BUILDINGS_TABLE, _.keys(building), _.values(building));
     });
