@@ -1,0 +1,3 @@
+#!/usr/bin/env bash
+
+sqlite3 -column -header bbhq.db "select * from upgrades where required_hq <= 11 order by exp_per_hour desc limit 20"
