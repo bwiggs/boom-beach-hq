@@ -6,7 +6,7 @@ var watch = require('gulp-watch');
 var batch = require('gulp-batch');
 
 var deps = [
-  'bower_components/react/react.min.js',
+  'bower_components/react/react.js',
   'bower_components/react/JSXTransformer.js',
 ];
 
@@ -36,6 +36,7 @@ gulp.task('es6to5', function () {
 gulp.task('sass', function () {
   gulp.src('assets/sass/**/*.scss')
     .pipe(sass().on('error', sass.logError))
+    .pipe(concat('styles.css'))
     .pipe(gulp.dest('dist/css'));
 });
 
