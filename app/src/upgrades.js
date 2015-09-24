@@ -6,21 +6,33 @@ class Upgrades extends React.Component {
 
   constructor(props) {
     super(props)
-    this.state = {}
+    this.state = {
+      hqLevel: 1
+    }
     this.loadUpgrades();
   }
 
-  loadUpgrades() {
-    db.all("select * from upgrades", (err, upgrades) => {
+  loadUpgrades(hqLevel) {
+    if(!hqLevel) hqLevel = this.state.hqLevel
+    db.all("select * from upgrades where required_hq <= " + hqLevel, (err, upgrades) => {
       this.setState({upgrades: upgrades})
     });
   }
 
+  hqLevelChange (evt) {
+    var newHqLevel = evt.target.value;
+    this.loadUpgrades(newHqLevel);
+    this.setState({hqLevel: newHqLevel});
+  }
+
   render() {
+
     if(!this.state.upgrades) return null
 
     return  <div>
       <h1>Upgrades</h1>
+      <label>HQ Level {this.state.hqLevel}</label>
+      <input type="range" min="1" max="20" value={this.state.hqLevel} onChange={this.hqLevelChange.bind(this)} />
       <UpgradesTable upgrades={this.state.upgrades} />
     </div>;
   }
@@ -37,20 +49,25 @@ class UpgradesTable extends React.Component {
       return <UpgradeRow upgrade={upgrade} key={upgrade.id}/>
     })
 
-    return  <table>
-      <tr>
-        <th>Name</th>
-        <th>Level</th>
-        <th>Experience</th>
-        <th>Exp/Hour</th>
-        <th>Required HQ</th>
-        <th>Gold</th>
-        <th>Wood</th>
-        <th>Stone</th>
-        <th>Iron</th>
-        <th>Time</th>
-      </tr>
-      {rows}
+    return  <table className="table table-striped ">
+      <thead>
+        <tr>
+          <th>Name</th>
+          <th>Level</th>
+          <th>Experience</th>
+          <th>Exp/Hour</th>
+          <th>Required HQ</th>
+          <th>Gold</th>
+          <th>Wood</th>
+          <th>Stone</th>
+          <th>Iron</th>
+          <th>Time</th>
+          <th>Upgrade</th>
+        </tr>
+      </thead>
+      <tbody>
+        {rows}
+      </tbody>
       </table>;
   }
 }
@@ -59,6 +76,14 @@ class UpgradeRow extends React.Component {
 
   constructor(props) {
     super(props)
+  }
+
+  upgrade(e) {
+    console.log(e);
+  }
+
+  downgrade(e) {
+    console.log(e);
   }
 
   render() {
@@ -73,6 +98,12 @@ class UpgradeRow extends React.Component {
         <td>{this.props.upgrade.stone}</td>
         <td>{this.props.upgrade.iron}</td>
         <td>{this.props.upgrade['time'] / 60}</td>
+        <td>
+          <div className="btn-group">
+            <span className="btn btn-default" onClick={this.upgrade}>Up</span>
+            <span className="btn btn-default" onClick={this.downgrade}>Down</span>
+          </div>
+        </td>
       </tr>;
   }
 
