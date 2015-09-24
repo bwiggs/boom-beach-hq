@@ -62,7 +62,6 @@ class UpgradeRow extends React.Component {
   }
 
   render() {
-    console.log(this.props.upgrade);
     return  <tr>
         <td>{this.props.upgrade.name}</td>
         <td>{this.props.upgrade.level}</td>
