@@ -5,6 +5,11 @@ var babel = require('gulp-babel');
 var watch = require('gulp-watch');
 var batch = require('gulp-batch');
 
+var depStyles = [
+  'bower_components/bootstrap/dist/css/bootstrap.css',
+  'bower_components/bootstrap/dist/css/bootstrap-theme.css',
+]
+
 var deps = [
   'bower_components/react/react.js',
   'bower_components/react/JSXTransformer.js',
@@ -13,6 +18,12 @@ var deps = [
 var app = [
   'src/**/*.js'
 ];
+
+gulp.task('dep-styles', function() {
+  return gulp.src(depStyles)
+    .pipe(concat('deps.css'))
+    .pipe(gulp.dest('./dist/css'));
+});
 
 gulp.task('dep-scripts', function() {
   return gulp.src(deps)
@@ -49,7 +60,7 @@ gulp.task('watch', function () {
   gulp.watch('src/**/*.js', ['build']);
 });
 
-gulp.task('build', ['sass', 'dep-scripts', 'es6to5']);
+gulp.task('build', ['sass', 'dep-styles', 'dep-scripts', 'es6to5']);
 gulp.task('default', ['build']);
 
 gulp.task('dev', ['build', 'watch', 'sass:watch']);
