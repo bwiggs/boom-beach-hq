@@ -29,6 +29,7 @@ gulp.task('app-scripts', function() {
 gulp.task('es6to5', function () {
   return gulp.src(app)
     .pipe(babel())
+    // .on('error', console.error.bind(console))
     .pipe(concat('app.js'))
     .pipe(gulp.dest('./dist/scripts'));
 });
@@ -45,9 +46,7 @@ gulp.task('sass:watch', function () {
 });
 
 gulp.task('watch', function () {
-    watch('src/**/*.js', batch(function (events, done) {
-        gulp.start('build', done);
-    }));
+  gulp.watch('src/**/*.js', ['build']);
 });
 
 gulp.task('build', ['sass', 'dep-scripts', 'es6to5']);

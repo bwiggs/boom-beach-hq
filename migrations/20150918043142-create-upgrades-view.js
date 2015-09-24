@@ -3,6 +3,7 @@ var dbm = global.dbm || require('db-migrate');
 exports.up = function(db, callback) {
   var sql = 'create view upgrades as \
   select \
+    ub.id, \
     ub.name, \
     nl.level, \
     max(ub.required_hq, nl.required_hq) as required_hq, \
