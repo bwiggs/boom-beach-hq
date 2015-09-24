@@ -25,6 +25,10 @@ class Upgrades extends React.Component {
     this.setState({hqLevel: newHqLevel});
   }
 
+  upgradeBuilding() {
+    console.log('upgade building');
+  }
+
   render() {
 
     if(!this.state.upgrades) return null
@@ -78,12 +82,16 @@ class UpgradeRow extends React.Component {
     super(props)
   }
 
-  upgrade(e) {
-    console.log(e);
-  }
+  upgrade(building, evt) {
+    db.all(`select * from building_levels where building_id = ${building.id} and level = ${building.level}`, (err, levels) => {
+      if(levels.length == 0) return;
+      db.run(`update user_buildings set building_level_id = ${levels[0].id} where id = ${building.id}`, (err, res) => {
+        console.log(err);
+        console.log(res);
+        this.loadUpgrades();
+      });
+    })
 
-  downgrade(e) {
-    console.log(e);
   }
 
   render() {
@@ -100,7 +108,7 @@ class UpgradeRow extends React.Component {
         <td>{this.props.upgrade['time'] / 60}</td>
         <td>
           <div className="btn-group">
-            <span className="btn btn-default" onClick={this.upgrade}>Up</span>
+            <span className="btn btn-default" onClick={this.upgrade.bind(this, this.props.upgrade)}>Up</span>
             <span className="btn btn-default" onClick={this.downgrade}>Down</span>
           </div>
         </td>
