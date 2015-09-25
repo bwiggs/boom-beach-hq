@@ -71,10 +71,13 @@ exports.up = function(db, callback) {
       db.all('select bl.id, bl.building_id, b.name from building_levels bl join buildings b on b.id = bl.building_id where bl.level = 1', function(err, buildingLevels) {
         // console.log(buildingLevels);
         _.each(userBuildings, function(ub) {
+
           bl = _.find(buildingLevels, function(b){ return b.name == ub.name });
           if(bl) {
             ub.building_id = bl.building_id;
-            // ub.building_level_id = bl.id;
+            if(ub.name == "Headquarters") {
+              ub.building_level_id = bl.id;
+            }
             db.insert(USER_BUILDINGS_TABLE, _.keys(ub), _.values(ub));
           } else {
             console.log('missing', ub);
