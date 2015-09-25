@@ -15,6 +15,7 @@ function createMainWindow() {
 	const win = new BrowserWindow({
 		width: 1000,
 		height: 600,
+    'title-bar-style': 'hidden'
 	});
 
 	win.loadUrl(`file://${__dirname}/app/index.html`);
