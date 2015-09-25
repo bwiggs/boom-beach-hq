@@ -19,6 +19,11 @@ var app = [
   'src/**/*.js'
 ];
 
+gulp.task('images', function() {
+    gulp.src('assets/images/**.*')
+    .pipe(gulp.dest('./dist/images'));
+});
+
 gulp.task('dep-styles', function() {
   return gulp.src(depStyles)
     .pipe(concat('deps.css'))
@@ -60,7 +65,7 @@ gulp.task('watch', function () {
   gulp.watch('src/**/*.js', ['build']);
 });
 
-gulp.task('build', ['sass', 'dep-styles', 'dep-scripts', 'es6to5']);
+gulp.task('build', ['images', 'sass', 'dep-styles', 'dep-scripts', 'es6to5']);
 gulp.task('default', ['build']);
 
 gulp.task('dev', ['build', 'watch', 'sass:watch']);

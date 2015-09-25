@@ -58,15 +58,15 @@ class UpgradesTable extends React.Component {
       <thead>
         <tr>
           <th>Name</th>
-          <th>Level</th>
-          <th>Experience</th>
+          <th><img src="dist/images/level.png" width="24" /></th>
+          <th><img src="dist/images/exp.png" width="24" /></th>
           <th>Exp/Hour</th>
-          <th>Required HQ</th>
-          <th>Gold</th>
-          <th>Wood</th>
-          <th>Stone</th>
-          <th>Iron</th>
-          <th>Time</th>
+          <th><img src="dist/images/hq.png" width="24" /></th>
+          <th><img src="dist/images/gold.png" width="24" /></th>
+          <th><img src="dist/images/wood.png" width="24" /></th>
+          <th><img src="dist/images/stone.png" width="24" /></th>
+          <th><img src="dist/images/iron.png" width="24" /></th>
+          <th><img src="dist/images/stopwatch.png" width="24" /></th>
           <th>Upgrade</th>
         </tr>
       </thead>
@@ -97,7 +97,11 @@ class UpgradeRow extends React.Component {
   render() {
     return  <tr>
         <td>{this.props.upgrade.name}</td>
-        <td>{this.props.upgrade.level ? <span className="label label-info">{this.props.upgrade.level}</span> : <span className="label label-success">NEW</span>}</td>
+        <td>
+          {this.props.upgrade.level ?
+              <span className="label label-info">{this.props.upgrade.level}</span>:
+              <span className="label label-success">+</span>}
+        </td>
         <td>{this.props.upgrade.experience}</td>
         <td>{this.props.upgrade.exp_per_hour}</td>
         <td>{this.props.upgrade.required_hq}</td>
