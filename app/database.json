@@ -1,6 +1,6 @@
 {
 	"dev": {
 		"driver": "sqlite3",
-		"filename": "bbhq.db"
+		"filename": "db/bbhq.db"
 	}
 }

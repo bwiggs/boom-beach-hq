@@ -1,3 +1,4 @@
+
 {
   "name": "boom-beach-hq",
   "productName": "BoomBeach Hq",
@@ -16,8 +17,10 @@
   "scripts": {
     "test": "xo",
     "eversion": "electron --version",
+    "migrate": "cd app && rm -f db/bbhq.db && db-migrate up -m db/migrations",
     "start": "electron .",
     "build": "electron-packager . $npm_package_productName --out=dist --ignore='^/dist$' --prune --asar --all --version=0.33.1",
+    "build-mac": "electron-packager . $npm_package_productName --out=dist --ignore='^/dist$' --prune --arch x64 --platform darwin --version=0.33.1 --icon bbhq.icns --overwrite",
     "xpostinstall": "npm run rebuild-sqlite3",
     "rebuild-sqlite3": "cd node_modules/sqlite3 && npm run prepublish && node-gyp configure --module_name=node_sqlite3 --module_path=../lib/binding/node-v46-darwin-x64 && node-gyp rebuild --target=0.33.1 --arch=x64 --target_platform=darwin --dist-url=https://atom.io/download/atom-shell --module_name=node_sqlite3 --module_path=../lib/binding/node-v46-darwin-x64"
   },

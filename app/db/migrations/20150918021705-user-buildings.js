@@ -40,7 +40,7 @@ exports.up = function(db, callback) {
     var parser = parse({delimiter: ',', columns: true});
     parser.on("readable", readRows);
     parser.on('finish', insertUserBuildings);
-    fs.createReadStream(__dirname+'/../data/buildings-per-hq.csv').pipe(parser);
+    fs.createReadStream(__dirname+'/../seed/buildings-per-hq.csv').pipe(parser);
 
     function readRows() {
       var record;

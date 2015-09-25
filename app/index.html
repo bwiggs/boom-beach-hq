@@ -20,6 +20,10 @@
 			<div id="main"></div>
 		</div>
 		<script src="dist/scripts/deps.js"></script>
+		<script>
+			var sqlite3 = require('sqlite3').verbose();
+			var db = new sqlite3.Database(`${__dirname}/db/bbhq.db`);
+		</script>
 		<script src="dist/scripts/app.js"></script>
 	</body>
 </html>

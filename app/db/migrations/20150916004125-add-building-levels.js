@@ -89,7 +89,7 @@ exports.up = function(db, callback) {
       callback();
     });
 
-    fs.createReadStream(__dirname+'/../data/master.csv').pipe(parser);
+    fs.createReadStream(__dirname+'/../seed/master.csv').pipe(parser);
   }
 };
 

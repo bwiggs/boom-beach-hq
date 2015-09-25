@@ -1,7 +1,3 @@
-
-var sqlite3 = require('sqlite3').verbose();
-var db = new sqlite3.Database('bbhq.db');
-
 class Upgrades extends React.Component {
 
   constructor(props) {
