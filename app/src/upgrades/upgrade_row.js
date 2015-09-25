@@ -15,6 +15,29 @@ class UpgradeRow extends React.Component {
     })
   }
 
+  getFormattedTime () {
+    let minutes = this.props.upgrade.time;
+    if(minutes == 0) {
+      return `instant`
+    } else if(minutes < 60) {
+      return `${minutes}m`
+    } else if(minutes < 24*60) {
+      let hours = minutes / 60;
+      return `${hours}h`
+    } else {
+      let days = minutes / 60 / 24
+      return `${days}d`
+    }
+  }
+
+  getResource(res) {
+    let resources = this.props.upgrade[res]
+    if(resources > 0) {
+      resources = resources.toLocaleString();
+    }
+    return resources;
+  }
+
   render() {
     return  <tr>
         <td>{this.props.upgrade.name}</td>
@@ -23,14 +46,14 @@ class UpgradeRow extends React.Component {
               <span className="label label-info">{this.props.upgrade.level}</span>:
               <span className="label label-success">+</span>}
         </td>
+        <td>{this.props.upgrade.required_hq}</td>
+        <td>{this.getResource('gold')}</td>
+        <td>{this.getResource('wood')}</td>
+        <td>{this.getResource('stone')}</td>
+        <td>{this.getResource('iron')}</td>
+        <td>{this.getFormattedTime()}</td>
         <td>{this.props.upgrade.experience}</td>
         <td>{this.props.upgrade.exp_per_hour}</td>
-        <td>{this.props.upgrade.required_hq}</td>
-        <td>{this.props.upgrade.gold}</td>
-        <td>{this.props.upgrade.wood}</td>
-        <td>{this.props.upgrade.stone}</td>
-        <td>{this.props.upgrade.iron}</td>
-        <td>{this.props.upgrade['time'] / 60}</td>
         <td>
           <div className="btn-group">
             <span className="btn btn-default" onClick={this.handleUpgrade.bind(this, this.props.upgrade, 1)}>Up</span>
