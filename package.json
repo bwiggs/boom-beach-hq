@@ -38,6 +38,7 @@
     "sqlite3": "^3.1.0"
   },
   "devDependencies": {
+    "babel-core": "^5.8.25",
     "csv-parse": "^1.0.0",
     "db-migrate": "^0.9.22",
     "electron-packager": "^5.0.0",
