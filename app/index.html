@@ -5,25 +5,25 @@
 		<title>BoomBeach HQ</title>
 		<link rel="stylesheet" href="dist/css/deps.css">
 		<link rel="stylesheet" href="dist/css/styles.css">
+		<!-- systemJS loader and config -->
+	    <script src="jspm_packages/system.js"></script>
+	    <script src="jspm.config.js"></script>
 	</head>
 	<body>
 		<div id="master">
 			<div id="header"></div>
-			<div id="sidebar">
-				<div class="resources">
-					<div class="gold">Gold</div>
-					<div class="wood">Wood</div>
-					<div class="stone">Stone</div>
-					<div class="iron">Iron</div>
-				</div>
-			</div>
+			<div id="sidebar"></div>
 			<div id="main"></div>
 		</div>
-		<script src="dist/scripts/deps.js"></script>
 		<script>
+			System.import('main');
 			var sqlite3 = require('sqlite3').verbose();
 			var db = new sqlite3.Database(`${__dirname}/db/bbhq.db`);
+			// var Sequelize = require('sequelize');
+			// var sequelize = new Sequelize(`sqlite://${__dirname}/db/bbhq.db`);
+			// console.log(sequelize);
+
 		</script>
-		<script src="dist/scripts/app.js"></script>
+		<!-- <script src="dist/scripts/app.js"></script> -->
 	</body>
 </html>
