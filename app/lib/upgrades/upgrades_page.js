@@ -1,4 +1,8 @@
-class UpgradesPage extends React.Component {
+import React from 'react'
+
+import UpgradesTable from 'upgrades/upgrades_table'
+
+export default class UpgradesPage extends React.Component {
 
   constructor(props) {
     super(props)
@@ -38,7 +42,5 @@ class UpgradesPage extends React.Component {
     </div>;
   }
 }
-
-React.render(<UpgradesPage />, document.getElementById('main'));
 
 

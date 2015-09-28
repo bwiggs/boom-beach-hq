@@ -1,4 +1,7 @@
-class UpgradesTable extends React.Component {
+import React from 'react'
+import UpgradeRow from 'upgrades/upgrade_row'
+
+export default class UpgradesTable extends React.Component {
 
   constructor(props) {
     super(props);
