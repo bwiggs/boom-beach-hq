@@ -41,7 +41,7 @@ let menuTemplate = [
         click: function() { require('shell').openExternal('https://github.com/bwiggs/boom-beach-hq') }
       },
     ]
-  }
+  },
   {
     label: 'Help',
     submenu: [
@@ -56,7 +56,7 @@ let menuTemplate = [
       }
     ]
   }
-]
+];
 var appMenu = Menu.buildFromTemplate(menuTemplate);
 
 
