@@ -6,7 +6,7 @@ import watch from 'gulp-watch';
 import notify from 'gulp-notify';
 
 const dirs = {
-  bower: 'app/bower',
+  bower: 'app/bower_components',
   src: 'app/src',
   dist: 'app/dist'
 };
@@ -25,6 +25,20 @@ var app = [
   `${dirs.src}/**/*.js`
 ];
 
+gulp.task('babel', () => {
+  return gulp.src(app)
+    .pipe(babel())
+    .on('error', notify.onError('<%= error.message %>'))
+    .on('error', function(e) {
+      console.log(`${e.name} ${e.message}`);
+      console.log(e.codeFrame);
+      // console.log(e.stack);
+      this.emit('end');
+    })
+    .pipe(concat('app.js'))
+    .pipe(gulp.dest(`${dirs.dist}/scripts`));
+});
+
 gulp.task('images', () => {
     gulp.src('app/assets/images/**.*')
     .pipe(gulp.dest(`${dirs.dist}/images`));
@@ -39,26 +53,6 @@ gulp.task('dep-styles', () => {
 gulp.task('dep-scripts', () => {
   return gulp.src(deps)
     .pipe(concat('deps.js'))
-    .pipe(gulp.dest(`${dirs.dist}/scripts`));
-});
-
-gulp.task('app-scripts', () => {
-  return gulp.src(app)
-    .pipe(concat('app.js'))
-    .pipe(gulp.dest(`${dirs.dist}/scripts`));
-});
-
-gulp.task('babel', () => {
-  return gulp.src(app)
-    .pipe(babel())
-    .on('error', notify.onError('<%= error.message %>'))
-    .on('error', (e) => {
-      console.log(`${e.name} ${e.message}`);
-      console.log(e.codeFrame);
-      // console.log(e.stack);
-      this.emit('end');
-    })
-    .pipe(concat('app.js'))
     .pipe(gulp.dest(`${dirs.dist}/scripts`));
 });
 
