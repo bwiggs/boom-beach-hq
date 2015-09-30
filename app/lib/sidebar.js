@@ -1,7 +1,7 @@
-class Sidebar extends React.Component {
+import React from 'react'
+
+export default class Sidebar extends React.Component {
   render() {
-    return  <div>The sidebar</div>;
+    return  <div className="sidebar">The Sidebar</div>;
   }
 }
-
-React.render(<Sidebar />, document.getElementById('sidebar'));

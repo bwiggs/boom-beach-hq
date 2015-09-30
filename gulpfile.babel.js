@@ -71,7 +71,7 @@ gulp.task('watch', () => {
   gulp.watch(`${dirs.src}/**/*.js`, ['build']);
 });
 
-gulp.task('dev', ['build', 'watch', 'sass:watch']);
+gulp.task('dev', ['sass:watch']);
 gulp.task('build', ['images', 'sass', 'dep-styles', 'dep-scripts', 'babel']);
 
 gulp.task('default', ['build']);

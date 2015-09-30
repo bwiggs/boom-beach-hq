@@ -1,4 +1,4 @@
 import React from 'react'
-import UpgradesPage from 'upgrades/upgrades_page'
+import App from 'app'
 
-React.render(<UpgradesPage />, document.getElementById('main'));
+React.render(<App />, document.body);
