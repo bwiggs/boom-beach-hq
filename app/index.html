@@ -7,7 +7,8 @@
 		<link rel="stylesheet" href="dist/css/styles.css">
 		<!-- systemJS loader and config -->
 	    <script src="jspm_packages/system.js"></script>
-	    <script src="jspm.config.js"></script>
+	    <script src="config.js"></script>
+	    <script src="build.js"></script>
 	</head>
 	<body>
 		<div id="master">
@@ -16,14 +17,13 @@
 			<div id="main"></div>
 		</div>
 		<script>
-			System.import('main');
 			var sqlite3 = require('sqlite3').verbose();
 			var db = new sqlite3.Database(`${__dirname}/db/bbhq.db`);
+			// System.import('./dist/scripts/deps.js')
+			System.import('main');
 			// var Sequelize = require('sequelize');
 			// var sequelize = new Sequelize(`sqlite://${__dirname}/db/bbhq.db`);
 			// console.log(sequelize);
-
 		</script>
-		<!-- <script src="dist/scripts/app.js"></script> -->
 	</body>
 </html>

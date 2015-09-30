@@ -34,6 +34,7 @@
   "dependencies": {
     "electron-debug": "^0.1.1",
     "lodash": "^3.10.1",
+    "sequelize": "^3.9.0",
     "sqlite3": "^3.1.0"
   },
   "devDependencies": {
@@ -60,16 +61,6 @@
     ],
     "rules": {
       "prefer-arrow-callback": 0
-    }
-  },
-  "jspm": {
-    "dependencies": {
-      "react": "npm:react@^0.13.3"
-    },
-    "devDependencies": {
-      "babel": "npm:babel-core@^5.8.24",
-      "babel-runtime": "npm:babel-runtime@^5.8.24",
-      "core-js": "npm:core-js@^1.1.4"
     }
   }
 }

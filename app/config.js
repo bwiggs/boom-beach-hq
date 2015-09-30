@@ -1,13 +1,5 @@
 System.config({
   baseURL: __dirname,
-
-  // "packages": {
-  //   "app": {
-  //     "main": "lib/main",
-  //     "defaultExtension": "js"
-  //   }
-  // },
-
   defaultJSExtensions: true,
   transpiler: "babel",
   babelOptions: {
@@ -16,11 +8,10 @@ System.config({
       "optimisation.modules.system"
     ]
   },
-
   paths: {
     "github:*": "jspm_packages/github/*",
     "npm:*": "jspm_packages/npm/*",
-    "*": "lib/*.js",
+    "*": "lib/*.js"
   },
 
   map: {
